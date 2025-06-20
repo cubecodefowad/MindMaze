@@ -1,0 +1,28 @@
+# Ignore virtual environments
+.venv/
+venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# IDE/editor settings
+.vscode/
+*.sublime*
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Environment variable files
+.env
+
+# Compiled files
+*.egg-info/
+dist/
+build/
