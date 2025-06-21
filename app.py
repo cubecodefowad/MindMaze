@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 import os
 import random
+import time
 from riddles import riddles
 
 app = Flask(__name__)
@@ -9,9 +10,15 @@ app.secret_key = os.urandom(24)
 @app.route("/")
 def index():
     session.clear()
+    return render_template("index.html")
+
+@app.route("/start", methods=["POST"])
+def start_game():
+    session['username'] = request.form.get('username', 'Player')
+    session['start_time'] = time.time()
     session['score'] = 0
     session['lives'] = 3
-    return render_template("index.html")
+    return redirect(url_for('level_view', level=1))
 
 @app.route("/level/<int:level>")
 def level_view(level):
@@ -28,7 +35,9 @@ def level_view(level):
         hint=riddle_data["hint"],
         level=level,
         score=session.get('score', 0),
-        lives=session.get('lives', 3)
+        lives=session.get('lives', 3),
+        username=session.get('username', 'Player'),
+        start_time=session.get('start_time')
     )
 
 @app.route("/submit_answer/<int:level>", methods=["POST"])

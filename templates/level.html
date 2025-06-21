@@ -28,6 +28,11 @@
   </style>
 </head>
 <body>
+  <div class="game-header">
+    <div id="timer">Time: 00:00</div>
+    <div id="username">{{ username }}</div>
+  </div>
+
   <div class="container">
     <h1>Level {{ level }}</h1>
     <p>{{ riddle }}</p>
@@ -53,6 +58,23 @@
   </div>
 
   <script>
+    const startTime = parseFloat('{{ start_time }}');
+
+    function updateTimer() {
+        if (isNaN(startTime)) return;
+
+        const now = Math.floor(Date.now() / 1000);
+        const elapsedTime = now - Math.floor(startTime);
+        const minutes = Math.floor(elapsedTime / 60).toString().padStart(2, '0');
+        const seconds = (elapsedTime % 60).toString().padStart(2, '0');
+        document.getElementById('timer').textContent = `Time: ${minutes}:${seconds}`;
+    }
+
+    if (!isNaN(startTime)) {
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    }
+
     function showHint() {
       document.getElementById("hint").style.display = "block";
     }
