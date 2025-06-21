@@ -1,29 +1,64 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, session, request
+import os
 from riddles import riddles
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route("/")
 def index():
+    session.clear()
+    session['score'] = 0
+    session['lives'] = 3
     return render_template("index.html")
 
 @app.route("/level/<int:level>")
 def level_view(level):
-    # level starts from 1
+    if session.get('lives', 0) <= 0:
+        return redirect(url_for("game_over"))
+
     if level > len(riddles):
         return redirect(url_for("victory"))
 
-    riddle_data = riddles[level - 1]  # zero-indexed list
+    riddle_data = riddles[level - 1]
     return render_template(
         "level.html",
         riddle=riddle_data["question"],
-        answer=riddle_data["answer"].lower(),
-        level=level
+        hint=riddle_data["hint"],
+        level=level,
+        score=session.get('score', 0),
+        lives=session.get('lives', 3)
     )
+
+@app.route("/submit_answer/<int:level>", methods=["POST"])
+def submit_answer(level):
+    user_answer = request.form.get("answer", "").lower().strip()
+    correct_answer = riddles[level - 1]["answer"].lower()
+
+    if user_answer == correct_answer:
+        session['score'] = session.get('score', 0) + 1
+        return redirect(url_for("level_view", level=level + 1))
+    else:
+        session['lives'] = session.get('lives', 3) - 1
+        if session['lives'] > 0:
+            return redirect(url_for("level_view", level=level))
+        else:
+            return redirect(url_for("game_over"))
 
 @app.route("/victory")
 def victory():
-    return render_template("victory.html")
+    score = session.get('score', 0)
+    session.clear()
+    return render_template("victory.html", score=score)
+
+@app.route("/game-over")
+def game_over():
+    score = session.get('score', 0)
+    session.clear()
+    return render_template("gameover.html", score=score)
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+

@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Victory - MindMaze</title>
+  <title>Game Over - MindMaze</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <style>
     body {
       text-align: center;
-      background-color: #121f12;
-      color: #d0ffd0;
+      background-color: #1a1a1a;
+      color: white;
       padding: 50px;
       font-family: 'Segoe UI', sans-serif;
     }
 
     h1 {
-      color: #50ff50;
+      color: #ff3333;
       font-size: 2.5em;
       margin-bottom: 10px;
     }
@@ -24,30 +24,30 @@
       font-size: 1.2em;
     }
 
-    .restart {
+    .retry {
       margin-top: 30px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #2d672d;
+      background-color: #333;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    .restart:hover {
-      background-color: #3d9a3d;
+    .retry:hover {
+      background-color: #555;
     }
 
-    .emoji {
+    .skull {
       font-size: 3em;
     }
   </style>
 </head>
 <body>
-  <div class="emoji">🏆</div>
-  <h1>You escaped the MindMaze!</h1>
+  <div class="skull">💀</div>
+  <h1>You couldn't escape MindMaze.</h1>
   <p>Your final score: <strong>{{ score }}</strong></p>
-  <button class="restart" onclick="window.location.href='/'">Play Again</button>
+  <button class="retry" onclick="window.location.href='/'">Try Again</button>
 </body>
 </html>
