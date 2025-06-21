@@ -8,17 +8,17 @@ def index():
     return render_template("index.html")
 
 @app.route("/level/<int:level>")
-def level(level):
-    if level >= len(riddles):
-        return redirect(url_for('victory'))
+def level_view(level):
+    # level starts from 1
+    if level > len(riddles):
+        return redirect(url_for("victory"))
 
-    riddle = riddles[level]
-    # Pass the riddle question and correct answer (lowercase) to template
+    riddle_data = riddles[level - 1]  # zero-indexed list
     return render_template(
         "level.html",
-        riddle=riddle["question"],
-        level=level + 1,
-        answer=riddle["answer"].lower()
+        riddle=riddle_data["question"],
+        answer=riddle_data["answer"].lower(),
+        level=level
     )
 
 @app.route("/victory")
