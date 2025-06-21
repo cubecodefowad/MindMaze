@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 import os
+import random
 from riddles import riddles
 
 app = Flask(__name__)
@@ -55,7 +56,15 @@ def victory():
 def game_over():
     score = session.get('score', 0)
     session.clear()
-    return render_template("gameover.html", score=score)
+    failure_messages = [
+        "The maze has claimed another mind.",
+        "You were so close, yet so far.",
+        "Better luck next time, maze runner.",
+        "Your journey ends here.",
+        "The riddles were too much for you."
+    ]
+    message = random.choice(failure_messages)
+    return render_template("gameover.html", score=score, message=message)
 
 if __name__ == "__main__":
     app.run(debug=True)
