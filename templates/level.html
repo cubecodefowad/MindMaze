@@ -47,14 +47,15 @@
         placeholder="Enter your answer"
         autocomplete="off"
         required
+        class="input-answer"
       />
-      <button type="submit">Submit</button>
+      <button type="submit" class="submit-riddle-ans">Submit</button>
     </form>
 
-    <button onclick="showHint()" style="margin-top: 10px;">Show Hint</button>
+    <button onclick="showHint()" style="margin-top: 10px;" class="show-hint-button">Show Hint</button>
     <p id="hint" style="display: none; margin-top: 10px;"><strong>Hint:</strong> {{ hint }}</p>
 
-    <button id="exit-button" type="button" style="margin-top: 20px;">Exit</button>
+    <button id="exit-button" type="button" style="margin-top: 20px;" class="exit-to-home">Exit</button>
   </div>
 
   <script>
