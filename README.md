@@ -20,6 +20,10 @@
 - Python 3.7+
 - Flask
 
+### 🌐 Live Demo
+Play MindMaze online here:  
+👉 [https://mindmaze-kwnv.onrender.com](https://mindmaze-kwnv.onrender.com)
+
 ### Setup
 ```bash
 git clone https://github.com/cubecodefowad/MindMaze.git
