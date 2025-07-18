@@ -11,43 +11,52 @@
       background-color: #121f12;
       color: #d0ffd0;
       padding: 50px;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Spectral', serif;
     }
-
     h1 {
       color: #50ff50;
       font-size: 2.5em;
       margin-bottom: 10px;
+      font-family: 'Creepster', cursive;
+      text-shadow: 0 0 12px #00b300, 0 0 2px #fff;
     }
-
     p {
       font-size: 1.2em;
+      font-family: 'Spectral', serif;
+      color: #ffbb33;
+      text-shadow: 0 0 8px #800000;
     }
-
     .restart {
       margin-top: 30px;
       padding: 10px 20px;
-      font-size: 16px;
-      background-color: #2d672d;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      font-size: 18px;
+      background: linear-gradient(90deg, #800000 0%, #1a1a1a 100%);
+      color: #fff;
+      border: 2px solid #50ff50;
+      border-radius: 2rem;
+      box-shadow: 0 0 12px #00b300, 0 0 2px #fff;
+      font-family: 'Creepster', cursive;
+      letter-spacing: 2px;
       cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
     }
-
     .restart:hover {
-      background-color: #3d9a3d;
+      background: linear-gradient(90deg, #50ff50 0%, #800000 100%);
+      box-shadow: 0 0 24px #50ff50, 0 0 8px #fff;
+      text-shadow: 0 0 8px #fff, 0 0 2px #50ff50;
+      animation: flicker 0.3s alternate infinite;
     }
-
     .emoji {
       font-size: 3em;
+      text-shadow: 0 0 16px #00b300;
     }
   </style>
 </head>
 <body>
   <div class="emoji">🏆</div>
-  <h1>You escaped the MindMaze!</h1>
-  <p>Your final score: <strong>{{ score }}</strong></p>
-  <button class="restart" onclick="window.location.href='/'">Play Again</button>
+  <h1>You escaped the MindMaze... for now</h1>
+  <p>Your final spectral score: <strong>{{ score }}</strong></p>
+  <button class="restart" onclick="window.location.href='/'">Play Again... If You Dare</button>
+  <footer class="haunted-footer">Crafted in the shadows by <a href="https://github.com/cubecodefowad" target="_blank">github/cubecodefowad</a></footer>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Game Over - MindMaze</title>
+  <title>Game Exited - MindMaze</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <style>
     body {
@@ -14,7 +14,7 @@
       font-family: 'Spectral', serif;
     }
     h1 {
-      color: #ff3333;
+      color: #ffbb33;
       font-size: 2.5em;
       margin-bottom: 10px;
       font-family: 'Creepster', cursive;
@@ -26,13 +26,13 @@
       color: #ffbb33;
       text-shadow: 0 0 8px #800000;
     }
-    .retry {
+    .home-btn {
       margin-top: 30px;
       padding: 10px 20px;
       font-size: 18px;
       background: linear-gradient(90deg, #800000 0%, #1a1a1a 100%);
       color: #fff;
-      border: 2px solid #ff3333;
+      border: 2px solid #ffbb33;
       border-radius: 2rem;
       box-shadow: 0 0 12px #800000, 0 0 2px #fff;
       font-family: 'Creepster', cursive;
@@ -40,24 +40,23 @@
       cursor: pointer;
       transition: background 0.2s, box-shadow 0.2s;
     }
-    .retry:hover {
-      background: linear-gradient(90deg, #ff3333 0%, #800000 100%);
-      box-shadow: 0 0 24px #ff3333, 0 0 8px #fff;
-      text-shadow: 0 0 8px #fff, 0 0 2px #ff3333;
+    .home-btn:hover {
+      background: linear-gradient(90deg, #ffbb33 0%, #800000 100%);
+      box-shadow: 0 0 24px #ffbb33, 0 0 8px #fff;
+      text-shadow: 0 0 8px #fff, 0 0 2px #ffbb33;
       animation: flicker 0.3s alternate infinite;
     }
-    .skull {
+    .exit-emoji {
       font-size: 3em;
       text-shadow: 0 0 16px #800000;
     }
   </style>
 </head>
 <body>
-  <div class="skull">💀</div>
-  <h1>Your soul is lost in MindMaze...</h1>
-  <p>{{ message }}</p>
+  <div class="exit-emoji">🚪</div>
+  <h1>You fled the MindMaze...</h1>
   <p>Your final spectral score: <strong>{{ score }}</strong></p>
-  <button class="retry" onclick="window.location.href='/'">Try Again... If You Dare</button>
+  <button class="home-btn" onclick="window.location.href='/'">Return to the Haunted Entrance</button>
   <footer class="haunted-footer">Crafted in the shadows by <a href="https://github.com/cubecodefowad" target="_blank">github/cubecodefowad</a></footer>
 </body>
-</html>
+</html> 

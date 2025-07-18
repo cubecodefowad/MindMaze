@@ -6,15 +6,15 @@
     <title>MindMaze</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
 <div class="container">
-    <h1>Welcome to MindMaze!</h1>
-    <p>Enter your name to begin.</p>
+    <h1>MindMaze</h1>
+    <p style="font-family: 'Spectral', serif; color: #ffbb33; text-shadow: 0 0 8px #800000;">Dare to enter? Whisper your name to begin your haunted journey...</p>
     <form action="{{ url_for('start_game') }}" method="POST">
-        <input type="text" name="username" placeholder="Your Name" required autocomplete="off" class="input-name">
-        <button type="submit" class="submit-name">Start Game</button>
+        <input type="text" name="username" placeholder="Your haunted name..." required autocomplete="off" class="input-name">
+        <button type="submit" class="submit-name">Begin the Nightmare</button>
     </form>
 </div>    
+<footer class="haunted-footer">Crafted in the shadows by <a href="https://github.com/cubecodefowad" target="_blank">github/cubecodefowad</a></footer>
 </body>
 </html>

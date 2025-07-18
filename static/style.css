@@ -1,114 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Spectral:wght@400;700&display=swap');
+
+html, body {
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
 body {
-    background-color: #111;
+    background: linear-gradient(135deg, #1a0022 0%, #2d0036 40%, #2a1a2e 70%, #3a0a1a 100%);
     color: #eee;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Spectral', serif;
     text-align: center;
+    text-shadow: 0 0 8px #000, 0 0 2px #800000;
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+    display: block;
+    flex-direction: unset;
+    justify-content: unset;
+    align-items: unset;
     padding: 2rem;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: 
+      repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.07) 0, rgba(255,255,255,0.03) 40px, transparent 80px),
+      repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.02) 60px, transparent 120px);
+    animation: fogMove 18s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes fogMove {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 120px 60px, -80px -40px; }
+}
+
+h1, h2, h3 {
+    font-family: 'Creepster', cursive;
+    letter-spacing: 2px;
+    color: #ff3333;
+    text-shadow: 0 0 12px #800000, 0 0 2px #fff;
 }
 
 .container {
     max-width: 600px;
     margin: auto;
+    background: rgba(20, 0, 0, 0.7);
+    border-radius: 16px;
+    box-shadow: 0 0 32px #000, 0 0 8px #800000;
+    padding: 2rem 1.5rem 2.5rem 1.5rem;
+    border: 2px solid #222;
+    z-index: 1;
 }
 
 input, button {
-    padding: 0.5rem;
-    margin: 1rem;
-    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+    margin: 1rem 0.5rem;
+    font-size: 1.1rem;
+    font-family: 'Spectral', serif;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 8px #800000 inset, 0 0 2px #fff inset;
+    background: #1a1a1a;
+    color: #eee;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+input::placeholder {
+    color: #b30000;
+    font-family: 'Spectral', serif;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    text-shadow: 0 0 4px #800000;
+}
+
+input:focus {
+    box-shadow: 0 0 16px #ff3333, 0 0 4px #fff;
+    background: #222;
+}
+
+button, .submit-riddle-ans, .show-hint-button, .exit-to-home, .home-btn, .retry, .restart {
+    font-family: 'Creepster', cursive;
+    background: linear-gradient(90deg, #800000 0%, #1a1a1a 100%);
+    color: #fff;
+    border: 2px solid #ff3333;
+    border-radius: 2rem;
+    box-shadow: 0 0 12px #800000, 0 0 2px #fff;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button:hover, .submit-riddle-ans:hover, .show-hint-button:hover, .exit-to-home:hover, .home-btn:hover, .retry:hover, .restart:hover {
+    background: linear-gradient(90deg, #ff3333 0%, #800000 100%);
+    color: #fff;
+    box-shadow: 0 0 24px #ff3333, 0 0 8px #fff;
+    text-shadow: 0 0 8px #fff, 0 0 2px #ff3333;
+    animation: flicker 0.3s alternate infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.85; }
+    100% { opacity: 1; }
 }
 
 .submit-name {
-  appearance: none;
-  background-color: #FFFFFF;
-  border-radius: 40em;
-  border-style: none;
-  box-shadow: #ADCFFF 0 -12px 6px inset;
-  box-sizing: border-box;
-  color: #000000;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -.24px;
-  margin: 0;
-  outline: none;
-  padding: 0.5rem 1rem;
-  quotes: auto;
-  text-align: center;
-  text-decoration: none;
-  transition: all .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+    font-family: 'Creepster', cursive;
+    background: linear-gradient(90deg, #800000 0%, #1a1a1a 100%);
+    color: #fff;
+    border: 2px solid #ff3333;
+    border-radius: 2rem;
+    box-shadow: 0 0 12px #800000, 0 0 2px #fff;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .submit-name:hover {
-  background-color: #FFC229;
-  box-shadow: #FF6314 0 -6px 8px inset;
-  transform: scale(1.05);
+    background: linear-gradient(90deg, #ff3333 0%, #800000 100%);
+    color: #fff;
+    box-shadow: 0 0 24px #ff3333, 0 0 8px #fff;
+    text-shadow: 0 0 8px #fff, 0 0 2px #ff3333;
+    animation: flicker 0.3s alternate infinite;
 }
 
-.submit-name:active {
-  transform: scale(1.015);
-}
-
-@media (min-width: 768px) {
-  .button-73 {
+.input-name, .input-answer {
+    border-radius: 2rem;
+    border: none;
+    padding: 0.7rem 1.2rem;
     font-size: 1.1rem;
-    padding: 0.5rem 1.3rem;
-  }
-}
-
-.input-name {
-  border-radius: 2rem;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  box-shadow: inset 0 0 5px rgba(255,255,255,0.1);
-}
-.input-answer {
-  border-radius: 2rem;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  box-shadow: inset 0 0 5px rgba(255,255,255,0.1);
-}
-
-.submit-riddle-ans, .show-hint-button, .exit-to-home {
-  background-color: #FFFFFF;
-  border: 0;
-  border-radius: .5rem;
-  box-sizing: border-box;
-  color: #111827;
-  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-size: .875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  text-decoration: none #D1D5DB solid;
-  text-decoration-thickness: auto;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.submit-riddle-ans:hover, .show-hint-button:hover, .exit-to-home:hover {
-  background-color: rgb(249,250,251);
-}
-
-.submit-riddle-ans:focus, .show-hint-button:focus, .exit-to-home:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.submit-riddle-ans:focus-visible, .show-hint-button:focus-visible, .exit-to-home:focus-visible {
-  box-shadow: none;
+    outline: none;
+    box-shadow: 0 0 8px #800000 inset, 0 0 2px #fff inset;
+    background: #1a1a1a;
+    color: #eee;
+    font-family: 'Spectral', serif;
 }
 
 .fail-overlay {
@@ -125,5 +168,52 @@ input, button {
 @keyframes bloodflash {
 0% { transform: scale(0.95); opacity: 0.6;}
 50% { transform: scale(1.02); opacity: 0.95;}
-100% { transform: scale(1); opacity: 0;}  
+100% { transform: scale(1); opacity: 0;}
+}
+
+.success-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #00b300 0%, #000 100%);
+    opacity: 0.7;
+    z-index: 9999;
+    animation: greenflash 1.2s ease-out;
+}
+
+@keyframes greenflash {
+0% { transform: scale(0.95); opacity: 0.5;}
+50% { transform: scale(1.02); opacity: 0.85;}
+100% { transform: scale(1); opacity: 0;}
+}
+
+.fade-in {
+  animation: fadeInHint 0.7s ease;
+}
+@keyframes fadeInHint {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.haunted-footer {
+    font-family: 'Creepster', cursive;
+    color: #ffbb33;
+    text-shadow: 0 0 8px #800000, 0 0 2px #fff;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    opacity: 0.85;
+}
+.haunted-footer a {
+    color: #fff;
+    text-decoration: underline wavy #ffbb33;
+    text-shadow: 0 0 6px #ffbb33, 0 0 2px #fff;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+.haunted-footer a:hover {
+    color: #ff3333;
+    text-shadow: 0 0 12px #ff3333, 0 0 4px #fff;
 }

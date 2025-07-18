@@ -25,6 +25,13 @@
       50% { background-color: #9e0000; }
       100% { background-color: white; }
     }
+    .fade-in {
+      animation: fadeInHint 0.7s ease;
+    }
+    @keyframes fadeInHint {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -35,31 +42,36 @@
 
   <div class="container">
     <h1>Level {{ level }}</h1>
-    <p>{{ riddle }}</p>
-    <p><strong>Score:</strong> {{ score }}</p>
-    <p><strong>Lives:</strong> {{ lives }}</p>
-
-    <form id="riddle-form" action="{{ url_for('submit_answer', level=level) }}" method="POST">
+    <p style="font-family: 'Spectral', serif; color: #ffbb33; text-shadow: 0 0 8px #800000;">{{ riddle }}</p>
+    <div id="lives-bar" style="margin-bottom: 10px;">
+      <strong style="color: #ff3333; text-shadow: 0 0 8px #800000;">Souls Remaining:</strong> <span id="lives-remaining">{{ lives }}</span>
+    </div>
+    <p style="font-family: 'Spectral', serif; color: #fff;">Spectral Score: <strong>{{ score }}</strong></p>
+    <form id="riddle-form" action="{{ url_for('submit_answer', level=level) }}" method="POST" data-submit-url="{{ url_for('submit_answer', level=level) }}">
       <input
         type="text"
         id="answer-input"
         name="answer"
-        placeholder="Enter your answer"
+        placeholder="Speak your answer to the void..."
         autocomplete="off"
         required
         class="input-answer"
       />
-      <button type="submit" class="submit-riddle-ans">Submit</button>
+      <button type="submit" class="submit-riddle-ans">Submit to the Shadows</button>
     </form>
-
-    <button onclick="showHint()" style="margin-top: 10px;" class="show-hint-button">Show Hint</button>
+    <div id="answer-error" style="color: #ff3333; margin-top: 10px; display: none;"></div>
+    <div id="hints-bar" style="margin-bottom: 10px;">
+      <strong style="color: #ffbb33; text-shadow: 0 0 8px #800000;">Ghostly Hints Left:</strong> <span id="hints-remaining">{{ hints_remaining }}</span> / 3
+    </div>
+    <button id="show-hint-button" type="button" style="margin-top: 10px;" class="show-hint-button">Summon a Hint</button>
     <p id="hint" style="display: none; margin-top: 10px;"><strong>Hint:</strong> {{ hint }}</p>
-
-    <button id="exit-button" type="button" style="margin-top: 20px;" class="exit-to-home">Exit</button>
+    <button id="exit-button" type="button" style="margin-top: 20px;" class="exit-to-home">Flee the Maze</button>
   </div>
+  <footer class="haunted-footer">Crafted in the shadows by <a href="https://github.com/cubecodefowad" target="_blank">github/cubecodefowad</a></footer>
 
   <script>
     const startTime = parseFloat('{{ start_time }}');
+    const level = {{ level }};
 
     function updateTimer() {
         if (isNaN(startTime)) return;
@@ -76,13 +88,32 @@
         updateTimer();
     }
 
-    function showHint() {
-      document.getElementById("hint").style.display = "block";
-    }
+    document.getElementById("show-hint-button").addEventListener("click", async function() {
+      const hintElem = document.getElementById("hint");
+      const hintsBar = document.getElementById("hints-remaining");
+      try {
+        const response = await fetch(`/use_hint/${level}`, { method: "POST" });
+        if (response.redirected) {
+          window.location.href = response.url;
+          return;
+        }
+        const data = await response.json();
+        hintElem.style.display = "block";
+        hintElem.classList.remove("fade-in");
+        void hintElem.offsetWidth; // trigger reflow for animation
+        hintElem.classList.add("fade-in");
+        hintsBar.textContent = data.hints_remaining;
+      } catch (err) {
+        // fallback: just show the hint
+        hintElem.style.display = "block";
+        hintElem.classList.add("fade-in");
+      }
+    });
 
     document.getElementById("exit-button").addEventListener("click", () => {
-      window.location.href = "/";
+      window.location.href = "/exit";
     });
   </script>
+  <script src="{{ url_for('static', filename='animations.js') }}"></script>
 </body>
 </html>
